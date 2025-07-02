@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQs | Comps N Care</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    function toggleAnswer(id) {
+      const answer = document.getElementById(id);
+      answer.classList.toggle("hidden");
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <div class="max-w-4xl mx-auto px-4 py-10">
+    <h1 class="text-4xl font-bold text-blue-700 text-center mb-10">Frequently Asked Questions</h1>
+    <div class="space-y-4">
+      
+      <!-- Repeat this block for each FAQ -->
+      <!-- Example FAQ -->
+      <div class="bg-white shadow rounded-xl p-4">
+        <button class="w-full text-left font-semibold text-blue-600 text-lg" onclick="toggleAnswer('faq1')">
+          1. What is Comps N Care?
+        </button>
+        <p id="faq1" class="mt-2 text-gray-700 hidden">
+          Comps N Care is a tech service platform offering doorstep computer and IT device repair, Annual Maintenance Contracts (AMC), E-waste recycling, and more. We ensure same-day service using OEM parts, with full transparency and reliability.
+        </p>
+      </div>
+
+      <!-- Add more FAQs here -->
+      <!-- Example -->
+      <div class="bg-white shadow rounded-xl p-4">
+        <button class="w-full text-left font-semibold text-blue-600 text-lg" onclick="toggleAnswer('faq2')">
+          2. How do I book a service through the app?
+        </button>
+        <p id="faq2" class="mt-2 text-gray-700 hidden">
+          1. Download and open the Comps N Care app.<br>
+          2. Sign in or register with your mobile number.<br>
+          3. Choose your required service (e.g., Laptop Repair, AMC, E-waste Pickup).<br>
+          4. Select your preferred time slot.<br>
+          5. Confirm your booking. A technician will visit you on the same day.
+        </p>
+      </div>
+
+      <!-- Use this template to add the remaining 38 FAQs -->
+      <!-- Example FAQ block generator -->
+      <!-- You can auto-generate remaining FAQ entries with a loop or using templating in your backend -->
+
+      <!-- ... FAQs 3 to 40 here ... -->
+
+      <!-- Final FAQ Example -->
+      <div class="bg-white shadow rounded-xl p-4">
+        <button class="w-full text-left font-semibold text-blue-600 text-lg" onclick="toggleAnswer('faq40')">
+          40. Can I chat with the technician before they arrive?
+        </button>
+        <p id="faq40" class="mt-2 text-gray-700 hidden">
+          Yes, once assigned, you'll have access to a secure in-app chat to communicate directly with the technician for special instructions or clarifications.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

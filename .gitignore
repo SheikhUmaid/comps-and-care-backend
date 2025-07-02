@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+local_settings.py
+
+# Migrations - optional (if you want to ignore generated migration files)
+# ** Caution: Only ignore migrations if they are not part of your deployment process
+# ** Uncomment below if needed
+# */migrations/
+# */migrations/*.py
+# */migrations/*.pyc
+
+# Environment variables
+.env
+.env.*
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
