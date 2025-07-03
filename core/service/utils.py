@@ -1,10 +1,13 @@
+from pathlib import Path
 from random import randint
-
 from twilio.rest import Client
-account_sid = 'AC76baa4cbac29f39750dba75bd09971a8'
-auth_token = 'f3115f991dbb9d34151fd59cc503d141'
-client = Client(account_sid, auth_token)
+from django.conf import settings
 
+# account_sid = env('TWILLIOSID', default='')
+# auth_token = env('TWILLIOAUTHTOKEN', default='')
+# client = Client(account_sid, auth_token)
+
+client = Client(settings.TWILIO_SID, settings.TWILIO_AUTH_TOKEN)
 def generate_otp()->str:
     """
     Generate a 6-digit OTP.

@@ -13,9 +13,15 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
+from decouple import config as env
+
+TWILIO_SID = env('TWILLIOSID', default='')
+TWILIO_AUTH_TOKEN = env('TWILLIOAUTHTOKEN', default='')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# auth_token = env('TWILLIOAUTHTOKEN', default='')
+# client = Client(account_sid, auth_token)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
