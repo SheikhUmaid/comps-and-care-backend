@@ -13,10 +13,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
-from decouple import config as env
+from decouple import config
 
-TWILIO_SID = env('TWILLIOSID', default='')
-TWILIO_AUTH_TOKEN = env('TWILLIOAUTHTOKEN', default='')
+TWILIO_SID = config('TWILLIOSID', default='')
+TWILIO_AUTH_TOKEN = config('TWILLIOAUTHTOKEN', default='')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -127,21 +127,20 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 
 
+
+
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cnc',             # your db name
-        'USER': 'cncuser',           # your db user
-        'PASSWORD': 'cncpass123',   # your db password
-        'HOST': 'localhost',        # local
-        'PORT': '5432',             # default PostgreSQL port
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
     }
 }
-
-
-
-
-
 
 
 
