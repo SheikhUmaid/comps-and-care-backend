@@ -112,12 +112,34 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
+
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'cnc',             # your db name
+        'USER': 'cncuser',           # your db user
+        'PASSWORD': 'cncpass123',   # your db password
+        'HOST': 'localhost',        # local
+        'PORT': '5432',             # default PostgreSQL port
     }
 }
+
+
+
+
+
+
+
+
+
 
 CHANNEL_LAYERS = {
     'default': {
