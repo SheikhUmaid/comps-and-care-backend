@@ -58,7 +58,7 @@ class SendOTPAPIView(APIView):
         if serializer.is_valid():
             phone_number = serializer.validated_data['phone_number']
             otp = generate_otp()
-            send_otp_via_sms(phone_number, otp)
+            # send_otp_via_sms(phone_number, otp)
             PhoneOTP.objects.update_or_create(
                 phone_number=phone_number,
                 defaults={'otp': otp, 'created_at': timezone.now(), 'is_verified': False}
@@ -69,6 +69,36 @@ class SendOTPAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class VerifyOTPAPIView(APIView):
+    
+    
+    MASTER_OTP = "0102"  # Master OTP for bypassing (use only in dev/testing)
+
+    def post(self, request, *args, **kwargs):
+        serializer = VerifyOTPSerializer(data=request.data)
+        if serializer.is_valid():
+            phone_number = serializer.validated_data['phone_number']
+            otp = serializer.validated_data['otp']
+
+            # Master OTP check
+            if otp == self.MASTER_OTP:
+                user, created = User.objects.get_or_create(username=phone_number)
+                if created:
+                    print("User created via master OTP:", user)
+                    user.set_unusable_password()
+                    user.save()
+
+                profile, created = Profile.objects.get_or_create(user=user)
+                profile.save()
+
+                access_token = AccessToken.for_user(user)
+                refresh_token = RefreshToken.for_user(user)
+
+                return Response({
+                    "access_token": str(access_token),
+                    "refresh_token": str(refresh_token),
+                    "message": "Logged in using master OTP"
+                }, status=200)
+
     def post(self, request, *args, **kwargs):
         serializer = VerifyOTPSerializer(data=request.data)
         if serializer.is_valid():
@@ -76,6 +106,7 @@ class VerifyOTPAPIView(APIView):
             otp = serializer.validated_data['otp']
             try:
                 otp_record = PhoneOTP.objects.get(phone_number=phone_number, otp=otp)
+                
             except PhoneOTP.DoesNotExist:
                 return Response({"error": "Invalid OTP"}, status=400)
             

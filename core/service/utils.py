@@ -12,7 +12,7 @@ def generate_otp()->str:
     """
     Generate a 6-digit OTP.
     """
-    otp = str(randint(1000, 9999))
+    otp = str("1111")
     return otp
 
 
