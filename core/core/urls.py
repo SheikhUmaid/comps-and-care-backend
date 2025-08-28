@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from service.views import add_brands,add_models, support
-
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
 
 
@@ -29,6 +29,9 @@ urlpatterns = [
     path('add_brands/',add_brands),
     path('add_models/',add_models),
     path('<str:path>/', support, name='pap'),
+    path("docs/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("docs/docs/swagger/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
+    path("docs/docs/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
 ]
 
 

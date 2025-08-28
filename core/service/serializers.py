@@ -5,10 +5,13 @@ from django.contrib.auth.models import User
 
 
 class SendOTPSerializer(serializers.Serializer):
-    phone_number = serializers.CharField(max_length=15, required=True)
+    phone_number = serializers.CharField(max_length=15, required=False)
+    email = serializers.EmailField(required=True)
+
 
 class VerifyOTPSerializer(serializers.Serializer):
-    phone_number = serializers.CharField(max_length=15, required=True)
+    phone_number = serializers.CharField(max_length=15, required=False)
+    email = serializers.EmailField(required=True)
     otp = serializers.CharField(max_length=6, required=True)
 
 class CategorySerializer(serializers.ModelSerializer):

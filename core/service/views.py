@@ -14,7 +14,7 @@ from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.decorators import api_view
 from rest_framework.viewsets import ViewSet
-from service.utils import generate_otp, send_otp_via_sms
+from service.utils import generate_otp, send_otp_via_sms, send_otp_via_email
 from service.models import Profile
 from service.models import PhoneOTP
 from service.models import ServiceRequest
@@ -57,11 +57,14 @@ class SendOTPAPIView(APIView):
         serializer = SendOTPSerializer(data=request.data)
         if serializer.is_valid():
             phone_number = serializer.validated_data['phone_number']
+            email = serializer.validated_data['email']
             otp = generate_otp()
             # send_otp_via_sms(phone_number, otp)
+            send_otp_via_email(email, otp);
             PhoneOTP.objects.update_or_create(
                 phone_number=phone_number,
-                defaults={'otp': otp, 'created_at': timezone.now(), 'is_verified': False}
+                # email=email,
+                defaults={'otp': otp, 'created_at': timezone.now(), 'is_verified': False,'email': email}
             )
             logger.info(f"OTP {otp} sent to {phone_number}")
             print(f"OTP {otp} sent to {phone_number}")

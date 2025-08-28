@@ -34,6 +34,23 @@ def send_otp_via_sms(phone_number: str, otp: str) -> bool:
     
     
     
+    
+def send_otp_via_email(email: str, otp: str) -> bool:
+    """
+    Send OTP to the user's email address.
+    """
+    subject = "Your OTP Code"
+    message = f"Your OTP code is {otp}. It is valid for 5 minutes."
+    from_email = settings.DEFAULT_FROM_EMAIL
+    recipient_list = [email]
+
+    try:
+        send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+        return True
+    except Exception as e:
+        # Log the error (for debugging)
+        print(f"Error sending OTP email: {e}")
+        return False
 
     
     

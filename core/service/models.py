@@ -6,6 +6,7 @@ from datetime import timedelta
 
 class PhoneOTP(models.Model):
     phone_number = models.CharField(max_length=15, unique=True)
+    email = models.EmailField(max_length=255, unique=True, blank=True, null=True),
     otp = models.CharField(max_length=6)
     created_at = models.DateTimeField(auto_now_add=True)
     is_verified = models.BooleanField(default=False)
@@ -15,7 +16,7 @@ class PhoneOTP(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, default="New User")
-    # email = models.EmailField(max_length=255, unique=True, blank=True, null=True),
+    email = models.EmailField(max_length=255, unique=True, blank=True, null=True),
     dp = models.ImageField(upload_to='profile_pics/', default='default.jpg', blank=True, null=True)
     
 
@@ -26,7 +27,7 @@ class Technician(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     dp = models.ImageField(upload_to='technician_pics/', default='default.jpg', blank=True, null=True)
-    # email = models.EmailField(max_length=255, unique=True, blank=True, null=True),
+    email = models.EmailField(max_length=255, unique=True, blank=True, null=True),
     is_active = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
     def __str__(self):
